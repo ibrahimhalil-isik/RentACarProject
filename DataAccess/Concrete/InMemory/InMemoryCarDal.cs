@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete
@@ -29,7 +30,7 @@ namespace DataAccess.Concrete
 
         public void Delete(Car car)
         {
-            Car carToDelete = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car carToDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
 
             _cars.Remove(carToDelete);
         }
@@ -39,14 +40,24 @@ namespace DataAccess.Concrete
             return _cars;
         }
 
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetById(int Id)
         {
-            return _cars.Where(c => c.Id == Id).ToList();
+            return _cars.Where(c => c.CarId == Id).ToList();
+        }
+
+        public Car GetById(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car carUpdate)
         {
-            Car carToUpdate = _cars.SingleOrDefault(c => c.Id == carUpdate.Id);
+            Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == carUpdate.CarId);
             carToUpdate.BrandId = carUpdate.BrandId;
             carToUpdate.ColorId = carUpdate.ColorId;
             carToUpdate.DailyPrice = carUpdate.DailyPrice;
