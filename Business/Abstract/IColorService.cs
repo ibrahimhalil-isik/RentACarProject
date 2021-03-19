@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IColorService
+    interface IColorService
     {
         List<Color> GetAll();
         List<Color> GetCarsByColorId(int colorId);
