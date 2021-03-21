@@ -5,7 +5,6 @@ using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 
 namespace Business.Concrete
@@ -19,7 +18,7 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public IResult  Add(Entities.Concrete.Color color)
+        public IResult Add(Entities.Concrete.Color color)
         {
             _colorDal.Add(color);
             return new SuccessResult(Messages.ProductAdded);
@@ -33,7 +32,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Entities.Concrete.Color>> GetAll()
         {
-            return new SuccessDataResult<List<Entities.Concrete.Color>>(_colorDal.GetAll());
+            return new SuccessDataResult<List<Entities.Concrete.Color>>(_colorDal.GetAll(),"Sonradan bi mesaj ayarlayacam inşallah");
         }
 
         public IDataResult<List<Entities.Concrete.Color>> GetCarsByColorId(int colorId)
