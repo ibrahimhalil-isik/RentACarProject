@@ -9,11 +9,19 @@ namespace Console
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            System.Console.WriteLine(" Şu anlık Database boş olduğu için sonuç alamıyoruz");
-            foreach (var car in carManager.GetCarDetails())
+            //System.Console.WriteLine(" Şu anlık Database boş olduğu için sonuç alamıyoruz");
+
+            //foreach (var car in carManager.GetCarDetails())
+            //{
+            //    System.Console.WriteLine("{0} : {1} : {2}",car.CarName,car.BrandName,car.ColorName);
+            //}
+
+            var ibrahim = carManager.GetCarDetails();
+            foreach (var car in ibrahim.Data)
             {
-                System.Console.WriteLine("{0} : {1} : {2}",car.CarName,car.BrandName,car.ColorName);
+                System.Console.WriteLine(car.CarName+ " : " + car.BrandName + " : " + car.ColorName);
             }
+
         }
     }
 }
