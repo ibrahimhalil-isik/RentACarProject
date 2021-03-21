@@ -8,8 +8,7 @@ namespace Console
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal());
-            //System.Console.WriteLine(" Şu anlık Database boş olduğu için sonuç alamıyoruz");
+            CarManager carManager = new CarManager(new EfCarDal());          
 
             //foreach (var car in carManager.GetCarDetails())
             //{
