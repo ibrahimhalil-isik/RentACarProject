@@ -8,9 +8,9 @@ namespace Core.Utilities.FileHelper
 {
     public class CarImagesFileHelper
     {
-        public static string Add(IFormFile file)
+        public static string Add(IFormFile formFile)
         {
-            string extension = Path.GetExtension(file.FileName).ToUpper();
+            string extension = Path.GetExtension(formFile.FileName).ToUpper();
             string newGuid = CreateGuid() + extension;
             var directory = Directory.GetCurrentDirectory() + "\\wwwroot";
             var path = directory + @"\Images";
@@ -21,18 +21,18 @@ namespace Core.Utilities.FileHelper
             string imagePath;
             using (FileStream fileStream = File.Create(path + "\\" + newGuid))
             {
-                file.CopyTo(fileStream);
+                formFile.CopyTo(fileStream);
                 imagePath = path + "\\" + newGuid;
                 fileStream.Flush();
             }
             return newGuid;
         }
-        public static void Update(IFormFile file, string OldPath)
+        public static void Update(IFormFile formFile, string OldPath)
         {
-            string extension = Path.GetExtension(file.FileName).ToUpper();
+            string extension = Path.GetExtension(formFile.FileName).ToUpper();
             using (FileStream fileStream = File.Open(OldPath.Replace("/", "\\"), FileMode.Open))
             {
-                file.CopyToAsync(fileStream);
+                formFile.CopyToAsync(fileStream);
                 fileStream.Flush();
             }
         }

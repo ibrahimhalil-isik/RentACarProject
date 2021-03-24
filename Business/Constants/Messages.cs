@@ -68,6 +68,7 @@ namespace Business.Constants
         public static string CarImageListed = "Araba Resmi Listelendi";
         public static string CarImageAddingLimit = "Araba sisteminde en fazla 5 resim eklenebilir";
         public static string IncorrectFileExtension = " Araba  resmi dosya uzantısı  yanlıştır";
+        public static string PictureNotFound = "Silinecek veya güncellenecek resim bulunamadı";
         public static string[] ValidImageFileTypes = { ".JPG", ".JPEG", ".PNG", ".TIF", ".TIFF", ".GIF", ".BMP", ".ICO" };
 
 

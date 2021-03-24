@@ -77,7 +77,7 @@ namespace Business.Concrete
         public IResult Update(CarImage carImage, IFormFile formFile)
         {
             IResult result = BusinessRules.Run(CheckIfImageLimit(carImage.CarId),
-               CheckIfImageExtensionValid(formFile));
+               CheckIfImageExtensionValid(formFile), CheckIfImageExists(carImage.CarImageId));
             if (result != null)
             {
                 return result;
@@ -107,7 +107,7 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
                
-            return new ErrorResult("Silinecek resim yok");
+            return new ErrorResult(Messages.PictureNotFound);
         }
 
 
