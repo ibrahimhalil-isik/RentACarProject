@@ -11,22 +11,21 @@ namespace Core.Utilities.FileHelper
         public static string Add(IFormFile file)
         {
             string extension = Path.GetExtension(file.FileName).ToUpper();
-            string newGuıd = CreateGuid() + extension;
+            string newGuid = CreateGuid() + extension;
             var directory = Directory.GetCurrentDirectory() + "\\wwwroot";
             var path = directory + @"\Images";
-            var webpath = "/Images/" + newGuıd;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
             string imagePath;
-            using (FileStream fileStream = File.Create(path + "\\" + newGuıd))
+            using (FileStream fileStream = File.Create(path + "\\" + newGuid))
             {
                 file.CopyTo(fileStream);
-                imagePath = path + "\\" + newGuıd;
+                imagePath = path + "\\" + newGuid;
                 fileStream.Flush();
             }
-            return webpath;
+            return newGuid;
         }
         public static void Update(IFormFile file, string OldPath)
         {
