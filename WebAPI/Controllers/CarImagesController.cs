@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class CarImagesController : ControllerBase
     {
-        IBrandService _brandService;
+        ICarImageService _carImagesService;
 
-        public BrandsController(IBrandService brandService)
+        public CarImagesController(ICarImageService carImageService)
         {
-            _brandService = brandService;
+            _carImagesService = carImageService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _brandService.GetAll();
+            var result = _carImagesService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -32,9 +32,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Brand brand)
+        public IActionResult Add([FromForm] CarImage carImage, [FromForm] IFormFile file)
         {
-            var result = _brandService.Add(brand);
+            var result = _carImagesService.Add(carImage,file);
             if (result.Success)
             {
                 return Ok(result);
