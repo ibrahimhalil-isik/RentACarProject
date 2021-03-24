@@ -46,12 +46,12 @@ namespace DataAccess.Concrete
             throw new NotImplementedException();
         }
 
-        public List<Car> GetById(int Id)
+        public List<Car> Get(int Id)
         {
             return _cars.Where(c => c.CarId == Id).ToList();
         }
 
-        public Car GetById(Expression<Func<Car, bool>> filter)
+        public Car Get(Expression<Func<Car, bool>> filter)
         {
             throw new NotImplementedException();
         }

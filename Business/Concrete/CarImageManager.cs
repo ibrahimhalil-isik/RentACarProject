@@ -26,7 +26,8 @@ namespace Business.Concrete
 
         public IResult Add(CarImage carImage,IFormFile formFile)
         {
-            IResult result = BusinessRules.Run(CheckIfImageLimit(carImage.CarId));
+            IResult result = BusinessRules.Run(CheckIfImageLimit(carImage.CarId),
+                CheckIfImageExtensionValid(formFile));
             if (result != null)
             {
                 return result;
@@ -76,8 +77,7 @@ namespace Business.Concrete
         public IResult Update(CarImage carImage, IFormFile formFile)
         {
             IResult result = BusinessRules.Run(CheckIfImageLimit(carImage.CarId),
-               CheckIfImageExtensionValid(formFile),
-               CheckIfImageExists(carImage.CarImageId));
+               CheckIfImageExtensionValid(formFile));
             if (result != null)
             {
                 return result;
@@ -116,7 +116,7 @@ namespace Business.Concrete
             bool isValidFileExtension = Messages.ValidImageFileTypes.Any(i => i == Path.GetExtension(file.FileName).ToUpper());
             if (!isValidFileExtension)
             {
-                return new ErrorResult(Messages.CarImageAdded);
+                return new ErrorResult(Messages.IncorrectFileExtension);
             }
                 
             return new SuccessResult();
