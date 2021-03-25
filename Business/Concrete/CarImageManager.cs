@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.FileHelper;
 using Core.Utilities.Results.Abstract;
@@ -24,6 +26,7 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
+        //[ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(CarImage carImage,IFormFile formFile)
         {
             IResult result = BusinessRules.Run(CheckIfImageLimit(carImage.CarId),
@@ -32,12 +35,15 @@ namespace Business.Concrete
             {
                 return result;
             }
-
-            var result2 = CarImagesFileHelper.Add(formFile);
-            carImage.ImagePath = result2;
-            carImage.Date = DateTime.Now;
+            carImage.ImagePath = FileHelper.AddAsync(formFile);
             _carImageDal.Add(carImage);
             return new SuccessResult();
+
+            //var effect = CarImagesFileHelper.Add(formFile);
+            //carImage.ImagePath = effect;
+            //carImage.Date = DateTime.Now;
+            //_carImageDal.Add(carImage);
+            //return new SuccessResult();
         }
 
         public IResult Delete(CarImage carImage)
@@ -46,15 +52,22 @@ namespace Business.Concrete
             if (result != null)
             {
                 return result;
-            }
-            string path = GetById(carImage.CarImageId).Data.ImagePath;
-            CarImagesFileHelper.Delete(path);
-            return new SuccessResult();
+            }           
+
+            var oldpath = $@"{Environment.CurrentDirectory}\wwwroot{_carImageDal.Get(p => p.CarImageId == carImage.CarImageId).ImagePath}";
+            FileHelper.DeleteAsync(oldpath);
+
+            _carImageDal.Delete(carImage);
+            return new SuccessResult(Messages.CarImageDelete);
+
+            //string path = GetById(carImage.CarImageId).Data.ImagePath;
+            //CarImagesFileHelper.Delete(path);
+            //return new SuccessResult();
         }
 
         public IDataResult<List<CarImage>> GetAll()
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), "Mesajı daha sonra ayarlayacam");
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(),Messages.CarImageListed);
         }
 
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
@@ -63,10 +76,11 @@ namespace Business.Concrete
             if (!result)
             {
                 List<CarImage> carimage = new List<CarImage>();
-                carimage.Add(new CarImage { CarId = carId, ImagePath = "default.jpg" });
+                carimage.Add(new CarImage { CarId = carId, ImagePath = @"\Images\default1.jpg" });
                 return new SuccessDataResult<List<CarImage>>(carimage);
             }
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(p => p.CarId == carId));
+                        
         }
 
         public IDataResult<CarImage> GetById(int id)
@@ -74,6 +88,7 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarImageId == id));
         }
 
+        //[ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(CarImage carImage, IFormFile formFile)
         {
             IResult result = BusinessRules.Run(CheckIfImageLimit(carImage.CarId),
@@ -82,10 +97,17 @@ namespace Business.Concrete
             {
                 return result;
             }
-            carImage.Date = DateTime.Now;
-            string OldPath = GetById(carImage.CarImageId).Data.ImagePath;
+            var oldpath = $@"{Environment.CurrentDirectory}\wwwroot{
+                _carImageDal.Get(p => p.CarImageId == carImage.CarImageId).ImagePath}";
+            carImage.ImagePath = FileHelper.UpdateAsync(oldpath, formFile);
+
             _carImageDal.Update(carImage);
             return new SuccessResult();
+
+            //carImage.Date = DateTime.Now;
+            //string OldPath = GetById(carImage.CarImageId).Data.ImagePath;
+            //_carImageDal.Update(carImage);
+            //return new SuccessResult();
 
         }
 
@@ -122,6 +144,13 @@ namespace Business.Concrete
             return new SuccessResult();
 
         }
-       
+
+        public IResult TransactionalOperation(CarImage carImage, IFormFile file)
+        {
+            Add(carImage, file);
+            Update(carImage, file);
+
+            return new SuccessResult(Messages.CarImageUpdate);
+        }
     }
 }

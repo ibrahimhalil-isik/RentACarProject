@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -20,6 +22,7 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Customer customer)
         {
             _customerDal.Add(customer);
@@ -34,7 +37,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Customer>> GetAll()
         {
-            return new SuccessDataResult<List<Entities.Concrete.Customer>>(_customerDal.GetAll(),"Mesajı sonra yazacam");
+            return new SuccessDataResult<List<Entities.Concrete.Customer>>(_customerDal.GetAll(),Messages.CustomersListed);
+        }
+
+        public IDataResult<Customer> GetById(int customerId)
+        {
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == customerId));
         }
 
         public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
@@ -42,6 +50,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CustomerDetailDto>>();
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
