@@ -23,7 +23,7 @@ namespace Core.Utilities.Interceptors
             //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
 
             // Bu kod bütün methodları PerformanceAspect'e dahil eder...
-            classAttributes.Add(new PerformanceAspect(5));
+            //classAttributes.Add(new PerformanceAspect(5));
             
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }
