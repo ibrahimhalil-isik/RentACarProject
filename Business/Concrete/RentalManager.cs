@@ -69,6 +69,14 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
+            IResult result = BusinessRules.Run(
+               CheckIfCar(rental)
+               );
+
+            if (result != null)
+            {
+                return result;
+            }
             _rentalDal.Update(rental);
             return new SuccessResult();
         }
