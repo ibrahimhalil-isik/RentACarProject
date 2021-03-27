@@ -6,12 +6,6 @@ namespace Business.Constants
 {
     public class Messages
     {
-        //Silinecek
-        public static string ProductAdded = "Ürün eklendi";
-        public static string ProductNameInvalid = "Ürün ismi geçersiz";
-        public static string ProductNameInvalid2 = "Ürün ismi geçersiz";
-        public static string ProductListed = "Ürünler Listelendi";
-        public static string ErrorMessage = " Bir araç için en fazla 5 resim ekleyebilirsin ";
 
         // CAR
         public static string CarAdded = "Araba Eklendi.";
@@ -36,7 +30,7 @@ namespace Business.Constants
 
         // CUSTOMER
         public static string CustomerAdded = "Müşteri Eklendi.";
-        public static string CustomerUpdate = "Müşteri Güncellendi";
+        public static string CustomerUpdated = "Müşteri Güncellendi";
         public static string CustomerDeleted = "Müşteri Silindi.";
         public static string CustomersListed = "Müşteriler Listelendi";
 
@@ -45,7 +39,7 @@ namespace Business.Constants
         public static string UserAdded = "Kullanıcı Eklendi.";
         public static string UsersListed = "Kullanıcılar Listelendi.";
         public static string UserDeleted = "Kullanıcı Silindi.";
-        public static string UserUpdate = "Kullanıcı Güncellendi";
+        public static string UserUpdated = "Kullanıcı Güncellendi";
         public static string UserPassword = "Kullanıcı Şifresi En Az 8 Krakter Olmalı";
         public static string UserFristName = "Kullanıcı Adı Girilmelidir";
         public static string UserLastName = "Kullanıcı Soyadı Girlmelidir";
@@ -56,21 +50,29 @@ namespace Business.Constants
 
         // RENTAL
         public static string RentalAdded = "Araba Kiralama Bilgisi Eklendi.";
-        public static string RentalUpdate = "Araba Kiralama Bilgisi Güncellendi";
-        public static string RentalDelete = "Araba Kiralama Bilgisi Silindi";
+        public static string RentalUpdated = "Araba Kiralama Bilgisi Güncellendi";
+        public static string RentalDeleted = "Araba Kiralama Bilgisi Silindi";
         public static string RentalsListed = "Araba kiralama Bilgiler Listelendi";
         public static string RentalsRentDate = "Araba Kiralama Tarihi Girilmelidir";
-
+        public static string CarNotReturned = "Araba Teslim Edilmedi";
+ 
         //CarImage
         public static string CarImageAdded = "Araba Resmi Eklendi.";
-        public static string CarImageUpdate = "Araba Resmi Güncellendi";
-        public static string CarImageDelete = "Araba Resmi Silindi";
+        public static string CarImageUpdated = "Araba Resmi Güncellendi";
+        public static string CarImageDeleted = "Araba Resmi Silindi";
         public static string CarImageListed = "Araba Resmi Listelendi";
         public static string CarImageAddingLimit = "Araba sisteminde en fazla 5 resim eklenebilir";
         public static string IncorrectFileExtension = " Araba  resmi dosya uzantısı  yanlıştır";
         public static string PictureNotFound = "Silinecek veya güncellenecek resim bulunamadı";
         public static string[] ValidImageFileTypes = {".JPG", ".JPEG", ".PNG", ".TIF", ".TIFF", ".GIF", ".BMP", ".ICO"};
 
+        //Auth
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Sisteme giriş başarılı";
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
+        public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
+        public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
 
 
         // SYSTEM

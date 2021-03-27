@@ -36,13 +36,13 @@ namespace Business.Concrete
             }
 
             _rentalDal.Add(rental);
-            return new SuccessResult();
+            return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
-            return new SuccessResult();
+            return new SuccessResult(Messages.RentalDeleted);
         }
 
         public IDataResult<List<Rental>> GetAll()
@@ -78,15 +78,15 @@ namespace Business.Concrete
                 return result;
             }
             _rentalDal.Update(rental);
-            return new SuccessResult();
+            return new SuccessResult(Messages.RentalUpdated);
         }
 
         private IResult CheckIfCar(Rental rental)
         {
-            var result = _rentalDal.GetAll(p => p.CarId == rental.CarId && p.ReturnDate > rental.RentDate).ToList();
+            var result = _rentalDal.GetAll(r => r.CarId == rental.CarId && r.ReturnDate > rental.RentDate).ToList();
             if (result.Count != 0)
             {
-                return new ErrorResult("Araç şu an kullanımda");
+                return new ErrorResult(Messages.CarNotReturned);
             }
 
             return new SuccessResult();
