@@ -1,25 +1,28 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
 using System;
 
-namespace Console
+namespace console
 {
-    class Program
+    class program
     {
-        static void Main(string[] args)
+        static void main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal());
+            Console.WriteLine("sersdfa");
+            //carmanager carmanager = new carmanager(new efcardal());
 
-            //foreach (var car in carManager.GetCarDetails())
+            ////foreach (var car in carmanager.getcardetails())
+            ////{
+            ////    system.console.writeline("{0} : {1} : {2}",car.carname,car.brandname,car.colorname);
+            ////}
+
+            //var ibrahim = carmanager.getcardetails();
+            //foreach (var car in ibrahim.data)
             //{
-            //    System.Console.WriteLine("{0} : {1} : {2}",car.CarName,car.BrandName,car.ColorName);
+            //    system.console.writeline(car.carname + " : " + car.brandname + " : " + car.colorname);
             //}
-
-            var ibrahim = carManager.GetCarDetails();
-            foreach (var car in ibrahim.Data)
-            {
-                System.Console.WriteLine(car.CarName + " : " + car.BrandName + " : " + car.ColorName);
-            }
 
         }
     }

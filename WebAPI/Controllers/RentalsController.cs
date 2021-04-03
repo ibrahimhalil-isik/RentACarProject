@@ -30,11 +30,10 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-
-        [HttpGet("getrentaldetails")]
-        public IActionResult GetRentalDetails()
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int rentalId)
         {
-            var result = _rentalService.GetRentalDetails();
+            var result = _rentalService.GetById(rentalId);
             if (result.Success)
             {
                 return Ok(result);
@@ -42,10 +41,70 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+
+
+        [HttpGet("getrentaldetails")]
+        public IActionResult GetRentalDetails()
+        {
+            var result = _rentalService.GetRentalDetails();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getrentaldetailsbycarid")]
+        public IActionResult GetRentalDetailsByCarId(int carId)
+        {
+            var result = _rentalService.GetRentalDetailsByCarId(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }  
+
+        
+
         [HttpPost("add")]
         public IActionResult Add(Rental rental)
         {
             var result = _rentalService.Add(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete(Rental rental)
+        {
+            var result = _rentalService.Delete(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(Rental rental)
+        {
+            var result = _rentalService.Update(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
+        [HttpPost("datecheck")]
+        public IActionResult datecheck(Rental rental)
+        {
+            var result = _rentalService.DateCheck(rental);
             if (result.Success)
             {
                 return Ok(result);
