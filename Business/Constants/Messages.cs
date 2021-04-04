@@ -74,6 +74,12 @@ namespace Business.Constants
         public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
         public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
 
+        //CreditCard
+        public static string CardAdded = "Kredi kartı eklendi.";
+        public static string CardUpdated = "Kredi kartı güncenlendi.";
+        public static string CardsListed = "Kredi kartları listelendi.";
+        public static string CardDeleted = "Kredi kartı silindi.";
+        public static string PaymentSuccess = "Payment başarılı.";
 
         // SYSTEM
         public static string MaintenanceTime = "Sistem Bakımda";
