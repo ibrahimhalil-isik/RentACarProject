@@ -52,7 +52,7 @@ namespace Business.Concrete
 
             return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
         }
-       
+
         public IResult UserExists(string email)
         {
             if (_userService.GetByMail(email) != null)
