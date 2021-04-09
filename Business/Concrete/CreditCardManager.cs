@@ -19,16 +19,7 @@ namespace Business.Concrete
             _creditCardDal = creditCardDal;
         }
         public IResult Add(CreditCard creditCard)
-        {
-            if (creditCard.CardNumber.StartsWith("4"))
-            {
-                creditCard.CardType = "VISA";
-            }
-            else if (creditCard.CardNumber.StartsWith("5"))
-            {
-                creditCard.CardType = "MasterCard";
-            }
-            _creditCardDal.Add(creditCard);
+        {          
             return new SuccessResult(Messages.CardAdded);
         }
 
@@ -43,10 +34,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll(), Messages.CardsListed);
         }
 
-        public IDataResult<CreditCard> GetByCustomerId(int customerId)
-        {
-            return new SuccessDataResult<CreditCard>(_creditCardDal.Get(c => c.CustomerId == customerId));
-        }
+        //public IDataResult<CreditCard> GetByCustomerId(int customerId)
+        //{
+        //    return new SuccessDataResult<CreditCard>(_creditCardDal.Get(c => c.CustomerId == customerId));
+        //}
 
         public IResult Payment(CreditCard creditCard)
         {

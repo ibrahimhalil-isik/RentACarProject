@@ -64,16 +64,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbycustomer")]
-        public IActionResult GetByCustomer(int customerId)
-        {
-            var result = _creditCardService.GetByCustomerId(customerId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+        //[HttpGet("getbycustomer")]
+        //public IActionResult GetByCustomer(int customerId)
+        //{
+        //    var result = _creditCardService.GetByCustomerId(customerId);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+        //}
 
         [HttpPost("payment")]
         public IActionResult Payment(CreditCard creditCard)

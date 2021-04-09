@@ -17,7 +17,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (RentACarContext context = new RentACarContext())
             {
-                var result = from c in context.Cars
+                var result = from c in filter == null ?  context.Cars : context.Cars.Where(filter)
                              join b in context.Brands
                              on c.BrandId equals b.BrandId
                              join co in context.Colors
@@ -31,7 +31,12 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = co.ColorName,
                                  ModelYear = c.ModelYear,
                                  Description = c.Description,
-                                 ImagePath = context.CarImages.Where(x => x.CarId == c.CarId).Select(x=>x.ImagePath).FirstOrDefault()
+                                 Images =
+                            (from i in context.CarImages where i.CarId == c.CarId select i.ImagePath).ToList(),
+
+                                 Rentals = (from r in context.Rentals
+                                            where r.CarId == c.CarId
+                                            select r).ToList()
                              };
                 return result.ToList();
             }
