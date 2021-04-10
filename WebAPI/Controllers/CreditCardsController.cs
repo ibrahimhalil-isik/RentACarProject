@@ -75,15 +75,15 @@ namespace WebAPI.Controllers
         //    return BadRequest(result);
         //}
 
-        [HttpPost("payment")]
-        public IActionResult Payment(CreditCard creditCard)
-        {
-            var result = _creditCardService.Payment(creditCard);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+        //[HttpPost("payment")]
+        //public IActionResult Payment(CreditCard creditCard)
+        //{
+        //    var result = _creditCardService.Payment(creditCard);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+        //}
     }
 }
